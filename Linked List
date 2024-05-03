@@ -1,0 +1,162 @@
+// 3 classes should be created
+// 1.Node
+// 2. LinkedList
+// 3.Main Method Class
+
+class Node
+{
+    int data;
+    Node next;
+}
+
+class LinkedList
+{
+    Node head;
+   
+    public  void insert(int data)
+    {
+        //create node first
+       
+        Node node=new Node();
+        node.data=data;
+        node.next=null; //By default object is null
+       
+        if(head==null)  // For First insertion this condition is always satisfied
+        {
+            head=node;
+        }
+        else
+        {
+            Node temp=head;
+            while(temp.next!=null)
+            {
+                temp=temp.next;
+            }
+            temp.next=node;
+        }
+    }
+   
+    public void insertAtBegin(int data)
+    {
+        //creating node first
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+       
+        if(head==null)
+        {
+            head=node;
+        }
+        else
+        {
+            node.next=head;
+            head=node;
+        }
+       
+    }
+   
+    public void insertAt(int index,int data)
+    {
+        //first create node
+       
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+       
+        if(index==0)
+        {
+            insertAtBegin(data);
+            //return;  //terminate without executing remaining code
+        }
+       
+        else
+        {
+        Node temp=head;
+        int count=1;
+       
+        while(count<index)
+        {
+            temp=temp.next;
+            count++;
+        }
+        node.next=temp.next;
+        temp.next=node;
+        }
+    }
+   
+    public void insertAtEnd(int data)
+    {
+        //first create node
+        Node node=new Node();
+        node.data=data;
+        node.next=null;
+       
+        Node temp=head;
+        while(temp.next!=null)
+        {
+            temp=temp.next;
+        }
+        temp.next=node;
+       
+    }
+   
+    public void deleteAt(int index)
+    {
+        //no need to create new node for deleting
+       
+        if(index==0)
+        {
+            head=head.next;
+        }
+        else
+        {
+            Node temp=head;
+            int count=1;
+            while(count<index)
+            {
+                temp=temp.next;
+                count++;
+            }
+            Node n=temp.next;
+            System.out.println(n.data+" is deleted");
+            temp.next=temp.next.next;
+           
+        }
+    }
+   
+    public void display()
+    {
+        Node temp=head;
+       
+        while(temp!=null)
+        {
+            System.out.print(temp.data+" ");
+            temp=temp.next;
+        }
+    }
+}
+
+
+public class Main
+{
+    public static void main(String[] args)
+    {
+        LinkedList ll=new LinkedList();
+        ll.insert(7);
+        ll.insert(18);
+        ll.insert(45);
+        ll.display();
+        ll.insertAtBegin(17);
+        System.out.println();
+        ll.display();
+        System.out.println();
+        ll.insertAt(0,77);
+        ll.display();
+        System.out.println();
+        ll.insertAtEnd(777);
+        ll.display();
+        System.out.println();
+        ll.deleteAt(0);
+        ll.display();
+    }
+}
